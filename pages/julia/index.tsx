@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import JuliaCanvas from "../../components/fractals/julia/canvas";
+import JuliaComponent from "../../components/fractals/julia/component";
 
 const Julia: NextPage = () => {
-  return <JuliaCanvas />;
+  return <JuliaComponent />;
 };
 
 export default Julia;

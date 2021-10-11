@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "../components/layout/layout";
+import AppLayout from "../components/layout/app-layout";
 
 function FractalGalleryApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <AppLayout>
       <Component {...pageProps} />
-    </Layout>
+    </AppLayout>
   );
 }
 export default FractalGalleryApp;

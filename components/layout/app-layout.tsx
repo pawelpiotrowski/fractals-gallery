@@ -1,7 +1,9 @@
 import Head from "next/head";
-import styles from "./Layout.module.css";
+import AppFooter from "./app-footer";
+import AppTitle from "./app-title";
+import styles from "./AppLayout.module.css";
 
-export default function Layout({ children }: any) {
+export default function AppLayout({ children }: any) {
   return (
     <>
       <div className={styles.container}>
@@ -11,9 +13,13 @@ export default function Layout({ children }: any) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={styles.main}>
-          <div className={styles.header}>HEADER</div>
-          <div>{children}</div>
-          <div className={styles.footer}>FOOTER</div>
+          <div className={styles.header}>
+            <AppTitle />
+          </div>
+          {children}
+          <div className={styles.footer}>
+            <AppFooter />
+          </div>
         </main>
       </div>
     </>

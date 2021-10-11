@@ -31,6 +31,7 @@ function makeShader(type: any, source: any) {
 }
 
 let animateRef = 0;
+let playAnimation = false;
 
 function render() {
   const gl = canvasRef.context as WebGL2RenderingContext;
@@ -86,9 +87,12 @@ void main() {
       0.156 + 0.4 * Math.cos(t / 2000)
     );
     gl.drawArrays(gl.TRIANGLES, 0, 6);
-    requestAnimationFrame(animate);
+    if (playAnimation) {
+      animateRef = requestAnimationFrame(animate);
+    }
   }
-  animate();
+  playAnimation = true;
+  animateRef = requestAnimationFrame(animate);
 }
 
 function setCanvasDimensions(): void {
@@ -103,6 +107,7 @@ function setCanvasDimensions(): void {
 }
 
 function resetCanvas() {
+  playAnimation = false;
   cancelAnimationFrame(animateRef);
   canvasRef.context = null;
   canvasRef.element = null;
