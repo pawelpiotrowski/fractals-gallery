@@ -1,9 +1,16 @@
 html,
 body {
+  --global-background: #020202;
+  --spacer: 16px;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Alice", Lucida Bright, Georgia, serif;
+  background-color: var(--global-background);
+  color: #ddd;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 80%;
 }
 
 a {
@@ -14,3 +21,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* @font-face {
+  font-family: "Alice";
+  src: url("../public/fonts/Alice-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} */
