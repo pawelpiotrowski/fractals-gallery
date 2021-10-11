@@ -1,4 +1,5 @@
 .container {
+  --content-background: rgba(0, 0, 0, 0.4);
   min-height: 100vh;
   height: 100vh;
   overflow: hidden;
@@ -7,4 +8,22 @@
 .main {
   height: 100%;
   width: 100%;
+}
+
+.header,
+.footer {
+  background-color: var(--content-background);
+  left: 0;
+  padding: var(--spacer);
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.header {
+  top: 0;
+}
+
+.footer {
+  bottom: 0;
 }

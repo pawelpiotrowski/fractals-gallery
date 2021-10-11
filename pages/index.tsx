@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import MandelbrotCanvas from "../components/fractals/mandelbrot/canvas";
 
 const Home: NextPage = () => {
-  return <div>Home page</div>;
+  return <MandelbrotCanvas />;
 };
 
 export default Home;

@@ -11,9 +11,9 @@ export default function Layout({ children }: any) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={styles.main}>
-          <div>HEADER</div>
+          <div className={styles.header}>HEADER</div>
           <div>{children}</div>
-          <div>FOOTER</div>
+          <div className={styles.footer}>FOOTER</div>
         </main>
       </div>
     </>
