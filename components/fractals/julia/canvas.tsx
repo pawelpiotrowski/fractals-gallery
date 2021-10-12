@@ -1,24 +1,9 @@
-import { useEffect } from "react";
-import styles from "../Fractal.module.css";
-
-type CanvasRef = {
-  context: WebGL2RenderingContext | null;
-  element: HTMLCanvasElement | null;
-  width: number;
-  height: number;
-};
+import FractalCanvas from "../canvas";
+import { CanvasWebGLRef } from "../canvas.interface";
+import { setCanvasWebGL, setCanvasDimensions } from "../shared";
 
 const CANVAS_ID = "juliacanvas";
-
-const canvasRef: CanvasRef = {
-  context: null,
-  element: null,
-  width: 0,
-  height: 0,
-};
-
-const isCanvasSet = (): boolean =>
-  canvasRef.element !== null && canvasRef.context !== null;
+let canvasRef = {} as CanvasWebGLRef;
 
 function makeShader(type: any, source: any) {
   const gl = canvasRef.context as WebGL2RenderingContext;
@@ -95,53 +80,34 @@ void main() {
   animateRef = requestAnimationFrame(animate);
 }
 
-function setCanvasDimensions(): void {
-  if (!isCanvasSet()) {
-    return;
-  }
-  canvasRef.width = window.innerWidth;
-  canvasRef.height = window.innerHeight;
-  (canvasRef.element as HTMLCanvasElement).width = canvasRef.width;
-  (canvasRef.element as HTMLCanvasElement).height = canvasRef.height;
-  console.log("JULIA @ setting up canvas dimensions");
-}
-
 function resetCanvas() {
   playAnimation = false;
   cancelAnimationFrame(animateRef);
-  canvasRef.context = null;
-  canvasRef.element = null;
-  canvasRef.height = 0;
-  canvasRef.width = 0;
+  canvasRef = {} as CanvasWebGLRef;
+}
+
+function canvasOnResize(): void {
+  setCanvasDimensions(canvasRef);
 }
 
 function setCanvas(): void {
-  if (isCanvasSet()) {
+  if (
+    !setCanvasWebGL(canvasRef, CANVAS_ID) ||
+    !setCanvasDimensions(canvasRef)
+  ) {
     return;
   }
-  canvasRef.element = document.getElementById(CANVAS_ID) as HTMLCanvasElement;
-  canvasRef.context = canvasRef.element.getContext(
-    "webgl"
-  ) as WebGL2RenderingContext;
-
-  console.log("JULIA @ setting up the canvas");
-  setCanvasDimensions();
   render();
-
-  window.onresize = setCanvasDimensions;
+  window.onresize = canvasOnResize;
 }
 
 const JuliaCanvas = () => {
-  useEffect(() => {
-    // on init
-    setCanvas();
-    // on destroy
-    return resetCanvas;
-  });
   return (
-    <div className={styles.canvasFullScreen}>
-      <canvas id={CANVAS_ID}></canvas>
-    </div>
+    <FractalCanvas
+      canvasId={CANVAS_ID}
+      onInit={setCanvas}
+      onDestroy={resetCanvas}
+    />
   );
 };
 

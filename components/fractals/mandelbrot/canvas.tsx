@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import styles from "../Fractal.module.css";
 import {
   addRGB,
   adjustAspectRatio,
@@ -8,7 +6,12 @@ import {
   getSamples,
   iterateEquation,
 } from "./plot";
+import FractalCanvas from "../canvas";
+import { Canvas2DRef } from "../canvas.interface";
+import { setCanvas2D, setCanvasDimensions } from "../shared";
 
+const CANVAS_ID = "sierpinskicanvas";
+let canvasRef = {} as Canvas2DRef;
 let zoomStart = 4;
 let zoom = [zoomStart, zoomStart];
 let lookAtDefault = [-1.3, -0.3];
@@ -21,30 +24,6 @@ let dragToZoom = true;
 let colors = [[0, 0, 0, 0]];
 let renderId = 0; // To zoom before current render is finished/
 let steps = 10;
-
-type CanvasRef = {
-  context: CanvasRenderingContext2D | null;
-  element: HTMLCanvasElement | null;
-  image: ImageData | null;
-  width: number;
-  height: number;
-};
-
-const CANVAS_ID = "mandelbrotcanvas";
-
-const canvasRef: CanvasRef = {
-  context: null,
-  element: null,
-  image: null,
-  width: 0,
-  height: 0,
-};
-
-const isCanvasSet = (): boolean =>
-  canvasRef.element !== null && canvasRef.context !== null;
-
-const isCanvasDimensionSet = (): boolean =>
-  canvasRef.width > 0 && canvasRef.height > 0;
 
 /**
  * Render Helpers
@@ -170,7 +149,6 @@ function render(
 
   // Disallow redrawing while rendering
   scanline();
-  console.log("Mandelbrot @ render canvas");
 }
 
 /*
@@ -187,7 +165,7 @@ function draw(pickColor: any, superSamples: any) {
   xRange = [lookAt[0] - zoom[0] / 2, lookAt[0] + zoom[0] / 2];
   yRange = [lookAt[1] - zoom[1] / 2, lookAt[1] + zoom[1] / 2];
 
-  setCanvasDimensions();
+  setCanvasDimensions(canvasRef);
   setCanvasImage();
 
   const { width, height } = canvasRef;
@@ -223,27 +201,12 @@ function draw(pickColor: any, superSamples: any) {
 }
 
 function setCanvasImage(): void {
-  if (!isCanvasDimensionSet()) {
-    return;
-  }
   const { context, width } = canvasRef;
 
   canvasRef.image = (context as CanvasRenderingContext2D).createImageData(
     width,
     1
   );
-  console.log("Mandelbrot @ setting up canvas image");
-}
-
-function setCanvasDimensions(): void {
-  if (!isCanvasSet()) {
-    return;
-  }
-  canvasRef.width = window.innerWidth;
-  canvasRef.height = window.innerHeight;
-  (canvasRef.element as HTMLCanvasElement).width = canvasRef.width;
-  (canvasRef.element as HTMLCanvasElement).height = canvasRef.height;
-  console.log("Mandelbrot @ setting up canvas dimensions");
 }
 
 function resetCanvasOnResize() {
@@ -260,41 +223,27 @@ function resetCanvasOnResize() {
 }
 
 function resetCanvas() {
-  canvasRef.context = null;
-  canvasRef.element = null;
-  canvasRef.height = 0;
-  canvasRef.image = null;
-  canvasRef.width = 0;
+  canvasRef = {} as Canvas2DRef;
   lookAt = lookAtDefault;
   zoom = [zoomStart, zoomStart];
 }
 
 function setCanvas(): void {
-  if (isCanvasSet()) {
+  if (!setCanvas2D(canvasRef, CANVAS_ID) || !setCanvasDimensions(canvasRef)) {
     return;
   }
-  canvasRef.element = document.getElementById(CANVAS_ID) as HTMLCanvasElement;
-  canvasRef.context = canvasRef.element.getContext(
-    "2d"
-  ) as CanvasRenderingContext2D;
-
-  console.log("Mandelbrot @ setting up the canvas");
 
   draw(getColorPicker(), getSamples());
   window.onresize = resetCanvasOnResize;
 }
 
 const MandelbrotCanvas = () => {
-  useEffect(() => {
-    // on init
-    setCanvas();
-    // on destroy
-    return resetCanvas;
-  });
   return (
-    <div className={styles.canvasFullScreen}>
-      <canvas id={CANVAS_ID}></canvas>
-    </div>
+    <FractalCanvas
+      canvasId={CANVAS_ID}
+      onInit={setCanvas}
+      onDestroy={resetCanvas}
+    />
   );
 };
 
