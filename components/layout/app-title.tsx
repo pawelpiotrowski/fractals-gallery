@@ -12,6 +12,9 @@ export const AppTitle = () => {
         <Link href="/julia">
           <a>Julia</a>
         </Link>
+        <Link href="/sierpinski">
+          <a>Sierpinski</a>
+        </Link>
       </nav>
     </>
   );
