@@ -80,6 +80,7 @@ function setCanvas(): void {
 const SierpinskiCanvas = () => {
   return (
     <FractalCanvas
+      canvasClass="canvas--bckgd-dark-blue"
       canvasId={CANVAS_ID}
       onInit={setCanvas}
       onDestroy={resetCanvas}

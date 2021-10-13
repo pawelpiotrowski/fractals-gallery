@@ -12,11 +12,14 @@
   background-color: var(--global-background);
 }
 
+.canvas--bckgd-dark-blue canvas {
+  background-color: darkblue;
+}
+
 .info {
   background-color: var(--content-background);
   display: inline-block;
   left: var(--global-gap);
-  font-size: 80%;
   max-width: 300px;
   padding: var(--global-gap);
   position: relative;
@@ -24,15 +27,14 @@
 }
 
 .info__title {
-  border-bottom: 1px solid white;
   display: inline-block;
+  font-size: 1.38em;
   margin: 0;
-  text-transform: uppercase;
 }
 
 @counter-style space-counter {
   system: fixed;
-  symbols: 🔭 🛰️ 🚀 🛸;
+  symbols: 📙 🛰️ 💻 🚀 🛸;
   suffix: " ";
 }
 
@@ -44,8 +46,13 @@
 
 .info__list li {
   margin-bottom: 0.6em;
+  padding-left: 0.5em;
 }
 
 .info__list li:last-child {
   margin-bottom: auto;
+}
+
+.info__list li a {
+  text-decoration: underline;
 }

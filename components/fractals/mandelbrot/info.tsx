@@ -2,7 +2,11 @@ import FractalInfo from "../info";
 
 const content = {
   title: "Mandelbrot Set",
-  links: ["hello", "there", "credits"],
+  links: [
+    "https://en.wikipedia.org/wiki/Mandelbrot_set",
+    "https://csl.name/post/mandelbrot-rendering/",
+    "https://github.com/cslarsen/mandelbrot-js",
+  ],
 };
 
 const MandelbrotInfo = () => {

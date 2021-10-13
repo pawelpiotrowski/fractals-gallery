@@ -15,7 +15,13 @@ export type CanvasWebGLRef = CanvasRef & {
 };
 
 export type FractalCanvasProps = {
+  canvasClass?: string;
   canvasId: string;
   onInit: () => void;
   onDestroy: () => void;
+};
+
+export type FractalInfoProps = {
+  title: string;
+  links?: string[];
 };
