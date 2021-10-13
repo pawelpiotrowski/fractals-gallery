@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./AppLayout.module.css";
 
-export const AppTitle = () => {
+export const AppHeader = () => {
   return (
     <>
       <h1 className={styles.header__title}>JS Fractals Gallery</h1>
@@ -20,4 +20,4 @@ export const AppTitle = () => {
   );
 };
 
-export default AppTitle;
+export default AppHeader;
