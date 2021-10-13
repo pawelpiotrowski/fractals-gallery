@@ -15,6 +15,9 @@ export const AppHeader = () => {
         <Link href="/sierpinski">
           <a>Sierpinski</a>
         </Link>
+        <Link href="/tree">
+          <a>Tree</a>
+        </Link>
       </nav>
     </>
   );
