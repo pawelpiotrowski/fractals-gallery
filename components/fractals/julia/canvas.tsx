@@ -83,6 +83,7 @@ void main() {
 function resetCanvas() {
   playAnimation = false;
   cancelAnimationFrame(animateRef);
+  window.removeEventListener("resize", canvasOnResize);
   canvasRef = {} as CanvasWebGLRef;
 }
 
@@ -98,7 +99,7 @@ function setCanvas(): void {
     return;
   }
   render();
-  window.onresize = canvasOnResize;
+  window.addEventListener("resize", canvasOnResize);
 }
 
 const JuliaCanvas = () => {

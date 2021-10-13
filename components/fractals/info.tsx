@@ -1,11 +1,18 @@
+import { FractalInfoProps } from "./canvas.interface";
 import styles from "./Fractal.module.css";
 
-const FractalInfo = (props: any) => {
-  const linkLables = ["Found here", "Source"];
+const isLink = (str: string): boolean => str.startsWith("http");
+
+const FractalInfo = (props: FractalInfoProps) => {
+  const linkLables = ["Wiki", "Found here", "Source"];
   const links = (props.links || []).map((link: string, index: number) => {
     return (
       <li key={link}>
-        <a href={link}>{linkLables[index] || link}</a>
+        {isLink(link) ? (
+          <a href={link}>{linkLables[index] || link}</a>
+        ) : (
+          <span>{link}</span>
+        )}
       </li>
     );
   });

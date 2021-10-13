@@ -10,7 +10,14 @@ const FractalCanvas = (props: FractalCanvasProps) => {
     return props.onDestroy;
   });
   return (
-    <div className={styles.canvasFullScreen}>
+    <div
+      className={`${styles.canvasFullScreen} ${
+        props.canvasClass &&
+        props.canvasClass.length &&
+        props.canvasClass.length > 0 &&
+        styles[props.canvasClass]
+      }`}
+    >
       <canvas id={props.canvasId}></canvas>
     </div>
   );

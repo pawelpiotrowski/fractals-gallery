@@ -1,6 +1,6 @@
 import Head from "next/head";
 import AppFooter from "./app-footer";
-import AppTitle from "./app-title";
+import AppTitle from "./app-header";
 import styles from "./AppLayout.module.css";
 
 export default function AppLayout({ children }: any) {

@@ -60,3 +60,8 @@
 .footer footer {
   width: 100%;
 }
+
+.footer footer a {
+  color: #fbfbfb;
+  text-decoration: underline;
+}

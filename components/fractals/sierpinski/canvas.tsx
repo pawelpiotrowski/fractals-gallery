@@ -66,6 +66,7 @@ function onResize(): void {
 }
 
 function resetCanvas() {
+  window.removeEventListener("resize", onResize);
   canvasRef = {} as Canvas2DRef;
 }
 
@@ -74,12 +75,13 @@ function setCanvas(): void {
     return;
   }
   render();
-  window.onresize = onResize;
+  window.addEventListener("resize", onResize);
 }
 
 const SierpinskiCanvas = () => {
   return (
     <FractalCanvas
+      canvasClass="canvas--bckgd-dark-blue"
       canvasId={CANVAS_ID}
       onInit={setCanvas}
       onDestroy={resetCanvas}
