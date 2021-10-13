@@ -210,12 +210,7 @@ function setCanvasImage(): void {
 }
 
 function resetCanvasOnResize() {
-  (canvasRef.context as CanvasRenderingContext2D).clearRect(
-    0,
-    0,
-    window.innerWidth,
-    window.innerHeight
-  );
+  canvasRef.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
   lookAt = lookAtDefault;
   zoom = [zoomStart, zoomStart];
 
@@ -223,6 +218,7 @@ function resetCanvasOnResize() {
 }
 
 function resetCanvas() {
+  window.removeEventListener("resize", resetCanvasOnResize);
   canvasRef = {} as Canvas2DRef;
   lookAt = lookAtDefault;
   zoom = [zoomStart, zoomStart];
@@ -234,7 +230,7 @@ function setCanvas(): void {
   }
 
   draw(getColorPicker(), getSamples());
-  window.onresize = resetCanvasOnResize;
+  window.addEventListener("resize", resetCanvasOnResize);
 }
 
 const MandelbrotCanvas = () => {

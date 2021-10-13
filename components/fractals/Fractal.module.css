@@ -13,7 +13,11 @@
 }
 
 .canvas--bckgd-dark-blue canvas {
-  background-color: darkblue;
+  background-color: #23008b;
+}
+
+.canvas--bckgd-navy-blue canvas {
+  background-color: #00003f;
 }
 
 .info {
