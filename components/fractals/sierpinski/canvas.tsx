@@ -45,6 +45,26 @@ const createSierpinskiTriangle = (pos: any, sidelen: any, depth: any) => {
   }
 };
 
+function render(): void {
+  // To call the function, draw the Sierpinski triangle at the bottom left of the canvas ((0, 1000))
+  // with a side length of 1000px (the width of the canvas) and a depth of 5.
+  const { width, height } = canvasRef;
+  const sideBase = width < height ? width : height;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const side = sideBase * 0.8;
+  const startX = centerX - side / 2;
+  const startY = (centerY + side / 2) * 0.94;
+  const depth = 5;
+
+  createSierpinskiTriangle([startX, startY], side, depth);
+}
+
+function onResize(): void {
+  setCanvasDimensions(canvasRef);
+  render();
+}
+
 function resetCanvas() {
   canvasRef = {} as Canvas2DRef;
 }
@@ -53,22 +73,8 @@ function setCanvas(): void {
   if (!setCanvas2D(canvasRef, CANVAS_ID) || !setCanvasDimensions(canvasRef)) {
     return;
   }
-
-  // To call the function, draw the Sierpinski triangle at the bottom left of the canvas ((0, 1000)) with a side length of 1000px (the width of the canvas) and a depth of 5.
-  createSierpinskiTriangle(
-    [canvasRef.width / 4, canvasRef.width / 2],
-    canvasRef.width / 2,
-    5
-  );
-
-  window.onresize = () => {
-    setCanvasDimensions(canvasRef);
-    createSierpinskiTriangle(
-      [canvasRef.width / 4, canvasRef.width / 2],
-      canvasRef.width / 2,
-      5
-    );
-  };
+  render();
+  window.onresize = onResize;
 }
 
 const SierpinskiCanvas = () => {

@@ -4,7 +4,7 @@ const FractalInfo = (props: any) => {
   const linkLables = ["Found here", "Source"];
   const links = (props.links || []).map((link: string, index: number) => {
     return (
-      <li>
+      <li key={link}>
         <a href={link}>{linkLables[index] || link}</a>
       </li>
     );
