@@ -46,7 +46,18 @@
 .header__nav a {
   display: inline-block;
   margin-left: 12px;
+  text-decoration: underline;
   vertical-align: middle;
+}
+
+.header__nav a i {
+  font-style: normal;
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+.header__nav a:hover i {
+  transform: translate(2px, 1px);
 }
 
 .footer {

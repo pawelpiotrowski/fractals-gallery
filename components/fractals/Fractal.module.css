@@ -28,6 +28,7 @@
   padding: var(--global-gap);
   position: relative;
   top: calc(var(--page-horizontal-gap) + var(--global-gap));
+  z-index: 1;
 }
 
 .info__title {

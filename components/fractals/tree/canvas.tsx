@@ -51,7 +51,7 @@ function render(): void {
   window.requestAnimationFrame(() => {
     draw(
       windowInnerWidth / 2,
-      windowInnerHeight * 0.8,
+      windowInnerHeight * 0.9,
       superSizeMe ? 120 : 80,
       0,
       superSizeMe ? 10 : 8

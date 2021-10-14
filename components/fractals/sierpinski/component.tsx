@@ -4,8 +4,8 @@ import SierpinskiInfo from "./info";
 const SierpinskiComponent = () => {
   return (
     <>
-      <SierpinskiCanvas />
       <SierpinskiInfo />
+      <SierpinskiCanvas />
     </>
   );
 };
