@@ -4,8 +4,8 @@ import TreeInfo from "./info";
 const TreeComponent = () => {
   return (
     <>
-      <TreeCanvas />
       <TreeInfo />
+      <TreeCanvas />
     </>
   );
 };

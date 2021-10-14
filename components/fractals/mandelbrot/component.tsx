@@ -4,8 +4,8 @@ import MandelbrotCanvas from "./canvas";
 const MandelbrotComponent = () => {
   return (
     <>
-      <MandelbrotCanvas />
       <MandelbrotInfo />
+      <MandelbrotCanvas />
     </>
   );
 };

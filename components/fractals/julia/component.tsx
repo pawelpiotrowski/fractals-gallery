@@ -4,8 +4,8 @@ import JuliaInfo from "./info";
 const JuliaComponent = () => {
   return (
     <>
-      <JuliaCanvas />
       <JuliaInfo />
+      <JuliaCanvas />
     </>
   );
 };
